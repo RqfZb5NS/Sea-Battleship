@@ -25,10 +25,10 @@ namespace Network
             try
             {
                 WebClient wClient = new WebClient();
-                _stream = wClient.OpenRead("http://www.ip-ping.ru/");
+                _stream = wClient.OpenRead("http://ipinfo.io/");
                 _sr = new StreamReader(_stream ?? throw new InvalidOperationException());
                 string newLine;
-                Regex regex = new Regex("<div class=\"hc2\">(.*)</div>");
+                Regex regex = new Regex("\"ip\":\\s*\"(.*?)\"");
                 while ((newLine = _sr.ReadLine()) != null)
                 {
                     Match match = regex.Match(newLine);
